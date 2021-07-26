@@ -3,9 +3,14 @@ import FormInput from "../../components/FormInput";
 import Button from "../../components/Buttons";
 import "./index.scss";
 const LoginPage = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form submited");
+  };
+
   return (
     <div className="login-fragment">
-      <div className="login-container">
+      <form onSubmit={handleSubmit} className="login-container">
         <h1>Login through Email</h1>
         <FormInput type="Email" id="email" label="Email" width="40vh" />
         <FormInput
@@ -15,6 +20,7 @@ const LoginPage = () => {
           width="40vh"
         />
         <Button
+          type="submit"
           className="login-btn"
           text="Login"
           color="white"
@@ -28,7 +34,7 @@ const LoginPage = () => {
           backgroundColor="grey"
           link="/user/dashboard"
         />
-      </div>
+      </form>
     </div>
   );
 };
