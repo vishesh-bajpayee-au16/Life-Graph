@@ -1,0 +1,22 @@
+nav {
+  width: 100vw;
+  height: 7vh;
+  background-color: whitesmoke;
+
+  h2 {
+    position: absolute;
+    line-height: 7vh;
+    margin-left: 20px;
+    color: crimson;
+  }
+
+  .links {
+    line-height: 7vh;
+    float: right;
+    margin-right: 10px;
+
+    .link {
+      padding: 10px;
+    }
+  }
+}

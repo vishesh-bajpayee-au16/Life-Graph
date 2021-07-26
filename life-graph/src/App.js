@@ -1,15 +1,15 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import routes from "./routes";
-
-import LandingPage from "./containers/LandingPage";
+import Layout from "./containers/Layout";
 const App = () => {
   return (
     <div>
-      <LandingPage />
-      {routes.map((route) => (
-        <Route key={Math.random()} {...route} />
-      ))}
+      <Layout>
+        {routes.map((route) => (
+          <Route key={Math.random()} {...route} />
+        ))}
+      </Layout>
     </div>
   );
 };
