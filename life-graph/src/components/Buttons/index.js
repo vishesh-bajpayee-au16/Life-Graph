@@ -1,10 +1,10 @@
 import React from "react";
-
-const Button = () => {
+import "./index.scss";
+const Button = ({ text, color, backgroundColor }) => {
   return (
-    <div>
-      <button>Button</button>
-    </div>
+    <button style={{ color: color, backgroundColor: backgroundColor }}>
+      {text}
+    </button>
   );
 };
 
