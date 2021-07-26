@@ -1,0 +1,21 @@
+.input-div {
+  display: flex;
+  flex-direction: column;
+  margin: 24px;
+
+  label {
+    text-transform: uppercase;
+  }
+
+  input {
+    padding: 2px;
+    color: black;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    border-bottom: 1px solid crimson;
+    outline: none;
+    // background-color: crimson;
+    // border-radius: 10px;
+  }
+}

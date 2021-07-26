@@ -1,0 +1,20 @@
+.login-fragment {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  margin-top: 10vh;
+
+  .login-container {
+    h1 {
+      padding: 10px;
+      margin-left: 10px;
+    }
+    padding: 20px;
+
+    width: 25vw;
+    height: 30vh;
+    display: flex;
+    // justify-content: center;
+    flex-direction: column;
+  }
+}
