@@ -1,9 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./index.scss";
-const Button = ({ text, color, backgroundColor }) => {
+const Button = ({ text, color, backgroundColor, link }) => {
   return (
-    <button style={{ color: color, backgroundColor: backgroundColor }}>
-      {text}
+    <button style={{ backgroundColor: backgroundColor }}>
+      <Link style={{ color: color }} className="linkText" to={link}>
+        {text}
+      </Link>
     </button>
   );
 };
