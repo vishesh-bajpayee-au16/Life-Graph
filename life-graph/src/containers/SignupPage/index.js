@@ -3,6 +3,8 @@ import Button from "../../components/Buttons";
 import FormInput from "../../components/FormInput";
 import { userSignup } from "../../redux/actions/authActions";
 import { useDispatch } from "react-redux";
+import * as yup from "yup";
+
 import "./index.scss";
 const SignupPage = () => {
   const dispatch = useDispatch();
@@ -12,6 +14,14 @@ const SignupPage = () => {
     email: "",
     password: "",
   };
+
+  const schema = yup.object().shape({
+    fullname: yup.string().required().min(5),
+    username: yup.string().required().min(5).max(16),
+    email: yup.string().email().required(),
+    password: yup.string().max(516).min(6),
+  });
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Signup form submitted");
