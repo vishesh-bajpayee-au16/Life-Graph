@@ -3,15 +3,30 @@ import FormInput from "../../components/FormInput";
 import Button from "../../components/Buttons";
 import { userLogin } from "../../redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import axios from "axios";
 import "./index.scss";
+
+import * as yup from "yup";
+
 const LoginPage = () => {
+  // Validation schema
+  let schema = yup.object().shape({
+    email: yup.string().email().required(),
+    password: yup.string().required().min(6).max(516),
+  });
+
   const dispatch = useDispatch();
 
   const payload = {
     email: "",
     password: "",
   };
+  const loginDetails = useSelector((state) => state.loginDetails);
+  // State to handle error
+  const [error, seterror] = useState("");
 
+  // getting input from formInput component
   const onChangeInp = (target) => {
     if (target.type === "email") {
       payload.email = target.value;
@@ -24,10 +39,22 @@ const LoginPage = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  // handling the submit event
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(userLogin(payload));
-    console.log("Form submited");
+
+    const validation = await schema.isValid({
+      email: payload.email,
+      password: payload.password,
+    });
+
+    if (validation) {
+      dispatch(userLogin(payload));
+
+      await axios.post("http://localhost:8080/user/login", loginDetails);
+    } else {
+      schema.validate(payload).catch((err) => seterror(err.errors[0]));
+    }
   };
 
   return (
@@ -39,6 +66,7 @@ const LoginPage = () => {
         className="login-container"
       >
         <h1>Login through Email</h1>
+        <p>{error}</p>
         <FormInput
           onChangeInp={onChangeInp}
           type="email"
