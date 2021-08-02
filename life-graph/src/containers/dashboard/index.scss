@@ -1,0 +1,31 @@
+aside {
+  width: 20vw;
+  height: 90.8vh;
+  background-color: black;
+  border-radius: 20px;
+  margin-left: 10px;
+  margin-top: 10px;
+
+  .heading {
+    padding-top: 35px;
+    padding-left: 40px;
+    .greeting-head {
+      font-size: 50px;
+      color: crimson;
+
+      span {
+        font-size: 20px;
+        position: absolute;
+        left: 17vw;
+        top: 13.5vh;
+        cursor: pointer;
+        color: teal;
+      }
+    }
+    .greeting-name {
+      font-size: 28px;
+      color: white;
+      padding-left: 10px;
+    }
+  }
+}

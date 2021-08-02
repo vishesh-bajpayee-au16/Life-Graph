@@ -5,6 +5,7 @@ const PATHS = {
   login: "/user/login",
   signup: "/user/signup",
   help: "/help",
+  dashboard: "/dashboard",
 };
 
 export default PATHS;

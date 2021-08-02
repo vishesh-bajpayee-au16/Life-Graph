@@ -3,6 +3,7 @@ import Button from "../../components/Buttons";
 import FormInput from "../../components/FormInput";
 import { userSignup } from "../../redux/actions/authActions";
 import { useDispatch } from "react-redux";
+import { useState } from "react";
 import * as yup from "yup";
 
 import "./index.scss";
@@ -14,19 +15,29 @@ const SignupPage = () => {
     email: "",
     password: "",
   };
-
+  const [error, seterror] = useState("");
   const schema = yup.object().shape({
     fullname: yup.string().required().min(5),
-    username: yup.string().required().min(5).max(16),
+    username: yup.string().required().min(3).max(16),
     email: yup.string().email().required(),
     password: yup.string().max(516).min(6),
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Signup form submitted");
-    dispatch(userSignup(payload));
     console.log(payload);
+    const validation = await schema.isValid({
+      fullname: payload.fullname,
+      username: payload.username,
+      email: payload.email,
+      password: payload.password,
+    });
+    if (validation) {
+      dispatch(userSignup(payload));
+    } else {
+      schema.validate(payload).catch((err) => seterror(err.errors[0]));
+    }
   };
 
   const onChangeInp = (target) => {
@@ -45,8 +56,10 @@ const SignupPage = () => {
     <div className="login-fragment">
       <form onSubmit={handleSubmit} className="login-container">
         <h1>Create your acount </h1>
+        <p>{error}</p>
         <FormInput
           onChangeInp={onChangeInp}
+          placeholder="cannot be less than 5 characters"
           type="text"
           id="fullname"
           label="Full Name"
@@ -54,6 +67,7 @@ const SignupPage = () => {
         />
         <FormInput
           onChangeInp={onChangeInp}
+          placeholder="cannot be less than 5 characters"
           type="text"
           id="username"
           label="User Name"
@@ -61,6 +75,7 @@ const SignupPage = () => {
         />
         <FormInput
           onChangeInp={onChangeInp}
+          placeholder="enter a valid email"
           type="email"
           id="email"
           label="Email"
@@ -68,6 +83,7 @@ const SignupPage = () => {
         />
         <FormInput
           onChangeInp={onChangeInp}
+          placeholder="cannot be less than 6 characters"
           type="password"
           id="password"
           label="Password"
@@ -88,3 +104,4 @@ const SignupPage = () => {
 };
 
 export default SignupPage;
+

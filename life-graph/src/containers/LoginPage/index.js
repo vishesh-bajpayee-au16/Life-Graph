@@ -4,9 +4,9 @@ import Button from "../../components/Buttons";
 import { userLogin } from "../../redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+// import { PATHS } from "../../config/";
 import axios from "axios";
 import "./index.scss";
-
 import * as yup from "yup";
 
 const LoginPage = () => {
@@ -50,7 +50,6 @@ const LoginPage = () => {
 
     if (validation) {
       dispatch(userLogin(payload));
-
       await axios.post("http://localhost:8080/user/login", loginDetails);
     } else {
       schema.validate(payload).catch((err) => seterror(err.errors[0]));
